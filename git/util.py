@@ -539,7 +539,8 @@ class LockFile(object):
                           (self._file_path, lock_file))
 
         try:
-            open(lock_file, mode='w', closefd=True)
+            fd = open(lock_file, mode='w')
+            os.close(fd)
         except OSError as e:
             raise IOError(str(e))
 
